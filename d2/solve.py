@@ -1,8 +1,8 @@
-from utils import input
+example = """11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124"""
 
 
-def id_ranges():
-    row = input()[0]
+def id_ranges(input):
+    row = input[0]
     ranges = []
     for rang in row.split(","):
         x, y = rang.split("-")
@@ -34,21 +34,25 @@ def valid_id_2(x):
     return True
 
 
-def solve1():
+def solve1(input):
     total = 0
-    for low, high in id_ranges():
+    for low, high in id_ranges(input):
         for i in range(low, high + 1):
             if not valid_id(i, 2):
                 total += i
 
-    print(total)
+    return total
 
 
-def solve2():
+def solve2(input):
     total = 0
-    for low, high in id_ranges():
+    for low, high in id_ranges(input):
         for i in range(low, high + 1):
             if not valid_id_2(i):
                 total += i
 
-    print(total)
+    return total
+
+
+assert solve1([example]) == 1227775554
+assert solve2([example]) == 4174379265
