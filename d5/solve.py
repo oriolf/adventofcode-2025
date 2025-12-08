@@ -15,6 +15,7 @@ def parse_input(input):
     in_ranges = True
     ranges, ids = [], []
     for line in input:
+        line = line.strip()
         if line == "":
             in_ranges = False
         elif in_ranges:

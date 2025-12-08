@@ -28,11 +28,11 @@ def joltage(bank, digits):
 
 
 def solve1(input):
-    return sum(joltage(bank, 2) for bank in input)
+    return sum(joltage(bank.strip(), 2) for bank in input)
 
 
 def solve2(input):
-    return sum(joltage(bank, 12) for bank in input)
+    return sum(joltage(bank.strip(), 12) for bank in input)
 
 
 assert solve1(example.split("\n")) == 357

@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("."))
 
 def input():
     lst = list(open(sys.argv[1] + "/input", "r"))
-    return [x.strip() for x in lst]
+    return [x for x in lst]
 
 
 day = __import__(sys.argv[1] + ".solve")
