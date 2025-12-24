@@ -10,15 +10,9 @@ def id_ranges(input):
     return ranges
 
 
-def valid_id(x, parts):
-    s = str(x)
-    if len(s) % parts != 0:
-        return True
-
-    delta = int(len(s) / parts)
-
+def valid_id(s, delta, length):
     start, end = 0, delta
-    while end < len(s):
+    while end < length:
         if s[start:end] != s[end : end + delta]:
             return True
         start += delta
@@ -27,9 +21,20 @@ def valid_id(x, parts):
     return False
 
 
-def valid_id_2(x):
-    for i in range(2, len(str(x)) + 1):
-        if not valid_id(x, i):
+divisors = [[]]
+divs = []
+for i in range(1, 11):
+    for j in range(1, 11):
+        if i % j == 0:
+            divs.append(j)
+    divisors.append(divs[:-1])
+    divs = []
+
+
+def valid_id_2(s):
+    length = len(s)
+    for i in divisors[length]:
+        if not valid_id(s, i, length):
             return False
     return True
 
@@ -38,7 +43,9 @@ def solve1(input):
     total = 0
     for low, high in id_ranges(input):
         for i in range(low, high + 1):
-            if not valid_id(i, 2):
+            s = str(i)
+            length = len(s)
+            if length % 2 == 0 and not valid_id(s, int(length / 2), length):
                 total += i
 
     return total
@@ -48,7 +55,7 @@ def solve2(input):
     total = 0
     for low, high in id_ranges(input):
         for i in range(low, high + 1):
-            if not valid_id_2(i):
+            if not valid_id_2(str(i)):
                 total += i
 
     return total
